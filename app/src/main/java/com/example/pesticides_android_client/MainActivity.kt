@@ -27,10 +27,6 @@ class MainActivity : Activity(), SensorEventListener {
     private var mSensorManager: SensorManager? = null
     var tvHeading: TextView? = null
 
-    /**
-     * Variables for getting location
-     */
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
