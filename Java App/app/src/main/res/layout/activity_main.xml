@@ -1,24 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <Button
         android:id="@+id/buttonStartLocationUpdates"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/start_spraying"/>
+        android:layout_marginStart="25dp"
+        android:layout_marginBottom="50dp"
+        android:text="@string/start_spraying"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <Button
         android:id="@+id/buttonStopLocationUpdates"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/stop_spraying"/>
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="50dp"
+        android:text="@string/stop_spraying"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/distanceText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="176dp"
+        android:layout_marginEnd="181dp"
+        android:layout_marginBottom="200dp"
+        android:text="@string/distance"
+        app:layout_constraintBottom_toTopOf="@+id/buttonStartLocationUpdates"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/warningText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="252dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="143dp"
+        android:text="@string/if_you_get_too_close_to_water_a_warning_will_be_displayed"
+        app:layout_constraintBottom_toTopOf="@+id/distanceText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

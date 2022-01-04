@@ -2,4 +2,6 @@
     <string name="app_name">Pesticide Helper</string>
     <string name="start_spraying">Start Spraying</string>
     <string name="stop_spraying">Stop Spraying</string>
+    <string name="distance">Distance</string>
+    <string name="if_you_get_too_close_to_water_a_warning_will_be_displayed">If you get too close to water, a warning will be displayed</string>
 </resources>

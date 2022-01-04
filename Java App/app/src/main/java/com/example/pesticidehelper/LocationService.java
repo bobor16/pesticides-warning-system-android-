@@ -1,5 +1,6 @@
 package com.example.pesticidehelper;
 
+import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -13,6 +14,7 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -26,9 +28,14 @@ public class LocationService extends Service {
         public void onLocationResult(LocationResult locationResult) {
             super.onLocationResult(locationResult);
             if(locationResult != null && locationResult.getLastLocation() != null){
+                Intent broadcastIntent = new Intent();
                 double latitude = locationResult.getLastLocation().getLatitude();
                 double longitude = locationResult.getLastLocation().getLongitude();
-                Log.d("Location", latitude + ", " + longitude);
+                broadcastIntent.setAction("GET_LOCATION");
+                broadcastIntent.putExtra("Latitude", latitude);
+                broadcastIntent.putExtra("Longitude", longitude);
+                sendBroadcast(broadcastIntent);
+                //Log.d("Location in Service", String.valueOf(broadcastIntent.getExtras()));
             }
         }
     };
@@ -39,6 +46,7 @@ public class LocationService extends Service {
         throw new UnsupportedOperationException("Not implemented yet");
     }
 
+    @SuppressLint("MissingPermission")
     private void startLocationService(){
         String channelId = "location_notification_channel";
         NotificationManager notificationManager =
