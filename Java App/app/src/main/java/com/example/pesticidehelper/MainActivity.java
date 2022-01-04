@@ -21,6 +21,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.opencsv.CSVReader;
+import java.io.IOException;
+import java.io.FileReader;
+import java.io.InputStreamReader;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -86,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
                 distanceText.setText(distanceString + " meters");
                 Log.d("Location", latitude + ", " + longitude);
+                Log.d("Distance", String.valueOf(distance));
             }
         }
     }
@@ -125,6 +130,18 @@ public class MainActivity extends AppCompatActivity {
             intent.setAction(Constants.ACTION_START_LOCATION_SERVICE);
             startService(intent);
             Toast.makeText(this, "Location service started", Toast.LENGTH_SHORT).show();
+            try{
+                CSVReader reader = new CSVReader(new InputStreamReader(getResources().openRawResource(R.raw.coordinates)));//Specify asset file name
+                String [] nextLine;
+                while ((nextLine = reader.readNext()) != null) {
+                    // nextLine[] is an array of values from the line
+                    System.out.println(nextLine[0] + nextLine[1]);
+                    Log.d("VariableTag", nextLine[0]);
+                }
+            }catch(Exception e){
+                e.printStackTrace();
+                Toast.makeText(this, "The specified file was not found", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
