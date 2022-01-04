@@ -32,8 +32,9 @@ public class MainActivity extends AppCompatActivity {
 
     LocationReceiver receiver = new LocationReceiver();
 
-    double waterLatitude = 55.40384726734935;
-    double waterLongitude = 11.355091693578922;
+    //55.25387700480888, 11.291548754512178
+    double waterLatitude = 55.25387700480888;
+    double waterLongitude = 11.291548754512178;
     Location waterLocation = new Location("");
 
     Location currentLocation = new Location("");
@@ -81,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
             if(intent.getAction().equals("GET_LOCATION")){
                 TextView distanceText = findViewById(R.id.distanceText);
+                TextView warningText = findViewById(R.id.warningText);
                 double latitude = intent.getDoubleExtra("Latitude", 0);
                 double longitude = intent.getDoubleExtra("Longitude", 0);
                 currentLocation.setLatitude(latitude);
@@ -91,6 +93,12 @@ public class MainActivity extends AppCompatActivity {
                 distanceText.setText(distanceString + " meters");
                 Log.d("Location", latitude + ", " + longitude);
                 Log.d("Distance", String.valueOf(distance));
+
+                if(distance <= 20){
+                    warningText.setText("WARNING! You're too close to the water");
+                } else {
+                    warningText.setText("If you get too close to water a warning will be displayed");
+                }
             }
         }
     }
@@ -130,18 +138,6 @@ public class MainActivity extends AppCompatActivity {
             intent.setAction(Constants.ACTION_START_LOCATION_SERVICE);
             startService(intent);
             Toast.makeText(this, "Location service started", Toast.LENGTH_SHORT).show();
-            try{
-                CSVReader reader = new CSVReader(new InputStreamReader(getResources().openRawResource(R.raw.coordinates)));//Specify asset file name
-                String [] nextLine;
-                while ((nextLine = reader.readNext()) != null) {
-                    // nextLine[] is an array of values from the line
-                    System.out.println(nextLine[0] + nextLine[1]);
-                    Log.d("VariableTag", nextLine[0]);
-                }
-            }catch(Exception e){
-                e.printStackTrace();
-                Toast.makeText(this, "The specified file was not found", Toast.LENGTH_SHORT).show();
-            }
         }
     }
 
